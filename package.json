@@ -1,0 +1,33 @@
+{
+  "name": "typescript-angular-nest",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "install-dependencies": "npm run install-dependencies-frontend && npm run install-dependencies-back",
+    "install-dependencies-frontend": "cd frontend && npm i",
+    "install-dependencies-backend": "cd backend && npm i",
+    "start:frontend": "npm run install-dependencies-frontend && cd frontend && npm start",
+    "build:frontend": "cd frontend && npm run build",
+    "start:backend": "npm run install-dependencies-backend && cd backend && npm run start:dev",
+    "build:backend": "cd backend && npm run build",
+    "build": "npm run install-dependencies && npm run build:backend && npm run build:frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unufolio/typescript-angular-nest.git"
+  },
+  "keywords": [
+    "angular",
+    "nest",
+    "typescript"
+  ],
+  "author": "Unufolio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unufolio/typescript-angular-nest/issues"
+  },
+  "homepage": "https://github.com/unufolio/typescript-angular-nest#readme",
+  "engines": {
+    "node": "14.x"
+  }
+}
