@@ -38,7 +38,7 @@ export class TodoController {
   }
 
   @Get()
-  public async getTodoList(@Query() query, @Res() res: Response) {
+  public getTodoList(@Query() query, @Res() res: Response) {
     let status;
     switch (Number(query.status)) {
       case TodoStatusEnum.INACTIVE:
@@ -56,7 +56,7 @@ export class TodoController {
       default:
         status = null;
     }
-    await this.todoService.getTodoList(status).then((todoList: Todo[]) => {
+    this.todoService.getTodoList(status).subscribe((todoList: Todo[]) => {
       res
         .status(HttpStatus.OK)
         .json(new ResultEntity(new ArrayContent(todoList)));
@@ -64,26 +64,26 @@ export class TodoController {
   }
 
   @Delete(':id')
-  public async delete(@Param() params, @Res() res: Response) {
-    await this.todoService.deleteById(params.id);
+  public delete(@Param() params, @Res() res: Response) {
+    this.todoService.deleteById(params.id).subscribe();
     res.status(HttpStatus.OK).json(new ResultEntity(null));
   }
 
   @Patch(':id/activate')
-  public async activate(@Param() params, @Res() res: Response) {
-    await this.todoService.activateById(params.id);
+  public activate(@Param() params, @Res() res: Response) {
+    this.todoService.activateById(params.id).subscribe();
     res.status(HttpStatus.OK).json(new ResultEntity(null));
   }
 
   @Patch(':id/finish')
   public async finish(@Param() params, @Res() res: Response) {
-    await this.todoService.finishById(params.id);
+    this.todoService.finishById(params.id).subscribe();
     res.status(HttpStatus.OK).json(new ResultEntity(null));
   }
 
   @Patch(':id/cancel')
   public async cancel(@Param() params, @Res() res: Response) {
-    await this.todoService.cancelById(params.id);
+    this.todoService.cancelById(params.id).subscribe();
     res.status(HttpStatus.OK).json(new ResultEntity(null));
   }
 }

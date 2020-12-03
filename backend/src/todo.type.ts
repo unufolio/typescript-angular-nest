@@ -7,6 +7,17 @@ export interface Todo {
   isDeleted: boolean;
 }
 
+export class Todo {
+  constructor(
+    public id: string,
+    public name: string,
+    public status: TodoStatusEnum,
+    public createAt: Date,
+    public updateAt: Date,
+    public isDeleted: boolean,
+  ) {}
+}
+
 export class CreateTodoDTO {
   constructor(public name: string) {}
 }
