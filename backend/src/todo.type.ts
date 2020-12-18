@@ -7,6 +7,14 @@ export interface Todo {
   isDeleted: boolean;
 }
 
+export interface TodoQueryParam {
+  id: string;
+}
+
+export interface TodoQuery {
+  status: string;
+}
+
 export class Todo {
   constructor(
     public id: string,

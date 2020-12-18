@@ -11,7 +11,13 @@ import {
   Res,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
-import { CreateTodoDTO, Todo, TodoStatusEnum } from './todo.type';
+import {
+  CreateTodoDTO,
+  TodoQuery,
+  TodoQueryParam,
+  Todo,
+  TodoStatusEnum,
+} from './todo.type';
 import { Response } from 'express';
 import { ArrayContent, DataContent, ResultEntity } from './result-entity';
 import { v4 as UuidV4 } from 'uuid';
@@ -38,7 +44,7 @@ export class TodoController {
   }
 
   @Get()
-  public getTodoList(@Query() query, @Res() res: Response) {
+  public getTodoList(@Query() query: TodoQuery, @Res() res: Response) {
     let status;
     switch (Number(query.status)) {
       case TodoStatusEnum.INACTIVE:
@@ -70,7 +76,7 @@ export class TodoController {
   }
 
   @Patch(':id/activate')
-  public activate(@Param() params, @Res() res: Response) {
+  public activate(@Param() params: TodoQueryParam, @Res() res: Response) {
     this.todoService.activateById(params.id).subscribe();
     res.status(HttpStatus.OK).json(new ResultEntity(null));
   }

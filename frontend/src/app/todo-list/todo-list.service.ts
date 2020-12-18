@@ -4,46 +4,13 @@ import {v4 as UuidV4} from 'uuid';
 import {HttpClient} from '@angular/common/http';
 import {ArrayResultEntity, ResultEntity} from './result-entity';
 import {NzTableVirtualScrollDirective} from 'ng-zorro-antd/table';
-import {Observable} from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 
-let todoList: Todo[] = [
-  {
-    id: '2f204328-12f7-4812-9027-61460727034c',
-    name: '吃饭',
-    status: TodoStatusEnum.ACTIVE,
-    createAt: new Date(),
-    updateAt: new Date(),
-    isDeleted: false,
-  },
-  {
-    id: '7303356d-8fe7-4d04-8fa3-73b37a0b81af',
-    name: '睡觉',
-    status: TodoStatusEnum.INACTIVE,
-    createAt: new Date(),
-    updateAt: new Date(),
-    isDeleted: false,
-  },
-  {
-    id: '77d18bc1-5fa4-4804-a506-5c5b0994a150',
-    name: '打豆豆',
-    status: TodoStatusEnum.INACTIVE,
-    createAt: new Date(),
-    updateAt: new Date(),
-    isDeleted: false,
-  },
-  {
-    id: '470040db-a438-4b38-bc73-6a30200cd842',
-    name: '取消的 TODO',
-    status: TodoStatusEnum.CANCELED,
-    createAt: new Date(),
-    updateAt: new Date(),
-    isDeleted: false,
-  },
-];
+let todoList: Todo[] = [];
 
 // @Injectable()
 // export class TodoListService {
-//   public getTodoList(status: TodoStatusEnum): Todo[] {
+//   public getTodoList(status: TodoStatusEnum): Observable<Todo[]> {
 //     switch (status) {
 //       case TodoStatusEnum.INACTIVE:
 //         status = TodoStatusEnum.INACTIVE;
@@ -60,7 +27,7 @@ let todoList: Todo[] = [
 //       default:
 //         status = null;
 //     }
-//     return todoList
+//     return of(todoList
 //       .filter((it: Todo) => {
 //         return !it.isDeleted;
 //       })
@@ -70,10 +37,10 @@ let todoList: Todo[] = [
 //         } else {
 //           return true;
 //         }
-//       });
+//       }));
 //   }
 //
-//   public addTodo(name: string): void {
+//   public addTodo(name: string): Observable<any> {
 //     const todo: Todo = {
 //       id: UuidV4(),
 //       name,
@@ -83,37 +50,42 @@ let todoList: Todo[] = [
 //       isDeleted: false
 //     };
 //     todoList.push(todo);
+//     return EMPTY;
 //   }
 //
-//   public deleteById(id: string): void {
+//   public deleteById(id: string): Observable<any> {
 //     todoList = todoList.filter((it: Todo) => !(it.id === id));
+//     return EMPTY;
 //   }
 //
-//   public activateById(id: string): void {
+//   public activateById(id: string): Observable<any> {
 //     todoList = todoList.map((it: Todo) => {
 //       if (it.id === id) {
 //         it.status = TodoStatusEnum.ACTIVE;
 //       }
 //       return it;
 //     });
+//     return EMPTY;
 //   }
 //
-//   public cancelById(id: string): void {
+//   public cancelById(id: string): Observable<any> {
 //     todoList = todoList.map((it: Todo) => {
 //       if (it.id === id) {
 //         it.status = TodoStatusEnum.CANCELED;
 //       }
 //       return it;
 //     });
+//     return EMPTY;
 //   }
 //
-//   public finishById(id: string): void {
+//   public finishById(id: string): Observable<any> {
 //     todoList = todoList.map((it: Todo) => {
 //       if (it.id === id) {
 //         it.status = TodoStatusEnum.COMPLETED;
 //       }
 //       return it;
 //     });
+//     return EMPTY;
 //   }
 // }
 
